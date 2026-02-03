@@ -1,0 +1,35 @@
+name: Java CI with Maven
+
+# 1. Trigger: Chạy khi có code PUSH lên nhánh master hoặc main
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Chạy trên máy ảo Ubuntu của GitHub
+
+    steps:
+      # Bước 1: Tải code từ kho về máy ảo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Bước 2: Cài đặt Java 21 (Theo file pom.xml cũ của bro)
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      # Bước 3: Chạy lệnh Test (CHỈ CHẠY FILE CalculatorTesting)
+      # Thêm tham số -Dtest=TênClassMuốnChạy
+      - name: Test Calculator Only
+        run: mvn -Dtest=CalculatorTesting test
+
+      # (Tùy chọn) Bước 4: Thông báo nếu thành công
+      - name: Notify Success
+        if: success()
+        run: echo "🎉 Build và Test thành công rực rỡ!"
