@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ndyudev_tester">
+
+    <test name="ndyudev_tester">
+        <groups>
+            <run>
+                <include name="smoke"/>
+                <include name="regression"/>
+                <include name="giao-dien"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.ndyudev.testng.lab4.DemoTestNG"/>
+            <class name="com.ndyudev.testng.lab4.TestGroupDemo"/>
+        </classes>
+    </test>
+
+</suite>
